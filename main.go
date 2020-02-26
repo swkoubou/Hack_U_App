@@ -8,6 +8,7 @@ import (
 func main() {
 	router := gin.Default()
 
+	router.Static("./Assets", "./Assets")
 	router.LoadHTMLGlob("Views/*.html")
 
 	router.GET("/", func(context *gin.Context) {
