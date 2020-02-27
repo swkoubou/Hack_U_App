@@ -2,9 +2,9 @@ DROP DATABASE IF EXISTS hack_u_db;
 CREATE DATABASE hack_u_db;
 USE hack_u_db;
 
-CREATE TABLE `map`
+CREATE TABLE `WheelchairRentalLocations`
 (
-    `map_id`             INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `Location_id`        INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     `name`               VARCHAR(32)        NOT NULL, -- 場所の名前
     `location`           GEOMETRY           NOT NULL, -- 緯度経度
     `address_supplement` TEXT               NOT NULL, -- 建物の２階の受付
@@ -24,16 +24,16 @@ create table `tag`
 
 CREATE TABLE `map_tag`
 (
-    `map_id` INT,
-    `tag_id` INT,
-    FOREIGN KEY (map_id)
-        REFERENCES map (map_id)
+    `Location_id` INT,
+    `tag_id`      INT,
+    FOREIGN KEY (Location_id)
+        REFERENCES WheelchairRentalLocations (Location_id)
         ON DELETE SET NULL
         ON UPDATE RESTRICT,
     FOREIGN KEY (tag_id)
         REFERENCES tag (tag_id)
         ON DELETE SET NULL
         ON UPDATE RESTRICT,
-    UNIQUE map_tag_id (map_id, tag_id)
+    UNIQUE map_tag_id (Location_id, tag_id)
 ) ENGINE = innodb
   DEFAULT CHARSET = utf8;
