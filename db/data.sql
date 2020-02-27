@@ -13,7 +13,7 @@ VALUES ('無料'),
        ('長期貸出対応');
 
 
-INSERT INTO map_tag (Location_id, tag_id)
+INSERT INTO WheelchairRentalLocations_tag (Location_id, tag_id)
 VALUES (1, 2),
        (2, 2),
        (1, 3),

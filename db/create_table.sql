@@ -22,7 +22,7 @@ create table `tag`
 ) engine = innodb
   default charset = utf8;
 
-CREATE TABLE `map_tag`
+CREATE TABLE `WheelchairRentalLocations_tag`
 (
     `Location_id` INT,
     `tag_id`      INT,
