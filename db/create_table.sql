@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS hack_u_db;
 CREATE DATABASE hack_u_db;
 USE hack_u_db;
 
-CREATE TABLE `WheelchairRentalLocations`
+CREATE TABLE `wheelchair_rental_Locations`
 (
     `Location_id`        INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     `name`               VARCHAR(32)        NOT NULL, -- 場所の名前
@@ -22,12 +22,12 @@ create table `tag`
 ) engine = innodb
   default charset = utf8;
 
-CREATE TABLE `WheelchairRentalLocations_tag`
+CREATE TABLE `wheelchair_rental_Locations_tag`
 (
     `Location_id` INT,
     `tag_id`      INT,
     FOREIGN KEY (Location_id)
-        REFERENCES WheelchairRentalLocations (Location_id)
+        REFERENCES wheelchair_rental_Locations (Location_id)
         ON DELETE SET NULL
         ON UPDATE RESTRICT,
     FOREIGN KEY (tag_id)

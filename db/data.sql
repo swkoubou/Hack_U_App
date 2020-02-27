@@ -1,5 +1,5 @@
 USE hack_u_db;
-INSERT INTO WheelchairRentalLocations (name, location, address_supplement, address, phone_number, email, web_site_url)
+INSERT INTO wheelchair_rental_Locations (name, location, address_supplement, address, phone_number, email, web_site_url)
 VALUES ( 'hogehoge', POINT(36.3132613, 140.5670455), '2階の受付', '茨城県東茨城郡大洗町磯浜町'
        , NULL, 'hogehoge@aaamaile.com', NULL),
        ( 'niconico', POINT(35.7315028, 139.6422717), '1階カスタマーセンター', '東京都豊島区南池袋'
@@ -13,7 +13,7 @@ VALUES ('無料'),
        ('長期貸出対応');
 
 
-INSERT INTO WheelchairRentalLocations_tag (Location_id, tag_id)
+INSERT INTO wheelchair_rental_Locations_tag (Location_id, tag_id)
 VALUES (1, 2),
        (2, 2),
        (1, 3),
