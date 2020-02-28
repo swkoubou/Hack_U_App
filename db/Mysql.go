@@ -27,7 +27,11 @@ func NewMysql() *Mysql {
 	if utf8.RuneCountInString(mysqlPassword) == 0 {
 		panic("環境変数が読み込めませんでした:" + mysqlPassword)
 	}
-	src := fmt.Sprintf("%s:%s@tcp(localhost:3306)/hack_u_db", mysqlUser, mysqlPassword)
+	mysqlHost := os.Getenv("HACK_U_App_MYSQL_HOST")
+	if utf8.RuneCountInString(mysqlPassword) == 0 {
+		panic("環境変数が読み込めませんでした:" + mysqlLocal)
+	}
+	src := fmt.Sprintf("%s:%s@tcp(%s:3306)/hack_u_db", mysqlUser, mysqlPassword, mysqlHost)
 	db, err := sql.Open("mysql", src)
 	if err != nil {
 		panic(err)
@@ -106,7 +110,6 @@ WHERE tag.tag_id IN (?);`
 	}
 	return locations, nil
 }
-
 
 func (mysql *Mysql) FindAllTags() (tags []*Models.Tag, err error) {
 	query := `SELECT * FROM tag`
