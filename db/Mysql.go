@@ -29,7 +29,7 @@ func NewMysql() *Mysql {
 	}
 	mysqlHost := os.Getenv("HACK_U_App_MYSQL_HOST")
 	if utf8.RuneCountInString(mysqlPassword) == 0 {
-		panic("環境変数が読み込めませんでした:" + mysqlLocal)
+		panic("環境変数が読み込めませんでした:" + mysqlHost)
 	}
 	src := fmt.Sprintf("%s:%s@tcp(%s:3306)/hack_u_db", mysqlUser, mysqlPassword, mysqlHost)
 	db, err := sql.Open("mysql", src)
