@@ -1,0 +1,7 @@
+package Models
+
+type IDatabaseService interface {
+	FindAllLocation() (locations []*WheelchairRentalLocation, err error)
+	FindTags(tagIds []uint64) (locations []*WheelchairRentalLocation, err error)
+	FindAllTags() (tags []*Tag, err error)
+}
