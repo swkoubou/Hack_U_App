@@ -14,10 +14,25 @@ header{
     height: 50px;
     background: dodgerblue;
     display: flex;
+    align-items: center;
+}
+ul{
+    list-style: none;
 }
 .container{
     height: 100%;
 }
-input[type="text"] {
+.drbutton{
+    margin-left: auto;
+    padding: 0 10px;
+}
+.menu{
+    position: fixed;
+    height: 100%;
     width: 100%;
+    z-index: 100;
+    background: white;
+}
+.hide{
+    display: none;
 }
