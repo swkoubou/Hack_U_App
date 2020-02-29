@@ -22,11 +22,13 @@ func main() {
 		})
 	})
 
+	router.GET("/Page", controller.GetPage)
+
 	router.GET("/allLocation", controller.GetAllLocations)
 
 	router.GET("/search", controller.SearchTags)
 
 	router.GET("/allTag", controller.GetAllTags)
-	
+
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
