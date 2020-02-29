@@ -11,6 +11,7 @@ type WheelchairRentalLocation struct {
 	PhoneNumber       *sql.NullString // 電話番号
 	Email             *sql.NullString // メールアドレス
 	WebSiteUrl        *sql.NullString // webサイト
+	Tag				  []*Tag 		  // 持ってるタグ
 }
 
 func NewWheelchairRentalLocation() *WheelchairRentalLocation {

@@ -13,7 +13,18 @@ func NewWheelchairRentalLocationsSearchApplication(db Models.IDatabaseService) *
 }
 
 func (w *WheelchairRentalLocationsSearchApplication) GetAllLocation() ([]*Models.WheelchairRentalLocation, error) {
-	return w.database.FindAllLocation()
+	locations, err := w.database.FindAllLocation()
+	if err != nil {
+		return nil, err
+	}
+	for index, location := range locations {
+		tags, err := w.database.FindTag(location)
+		if err != nil {
+			return nil, err
+		}
+		locations[index].Tag = tags
+	}
+	return locations, err
 }
 
 func (w *WheelchairRentalLocationsSearchApplication) SearchTag(tagIds []uint64) ([]*Models.WheelchairRentalLocation, error) {
