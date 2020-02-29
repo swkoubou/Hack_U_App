@@ -22,8 +22,12 @@ ul{
 .container{
     height: 100%;
 }
-.drbutton{
+.push{
     margin-left: auto;
+    display: flex;
+}
+.headbutton{
+    /*margin-left: auto;*/
     padding: 0 10px;
 }
 .menu{
@@ -33,6 +37,21 @@ ul{
     z-index: 100;
     background: white;
 }
+.refine{
+    position: fixed;
+    height: 50%;
+    width: 100%;
+    z-index: 100;
+    background: white;
+    display: flex;
+}
+.taglabel{
+    margin: 0 5px;
+    height: 2em;
+}
 .hide{
     display: none;
+}
+.select{
+    background: lightskyblue;
 }
