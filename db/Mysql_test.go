@@ -2,6 +2,7 @@ package Infrastructure
 
 import (
 	"fmt"
+	"github.com/swkoubou/Hack_U_App/Models"
 	"testing"
 )
 
@@ -42,6 +43,21 @@ func TestMysql_FindAllTags(t *testing.T) {
 	defer database.db.Close()
 
 	result, err := database.FindAllTags()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(len(result))
+	for _, location := range result {
+		fmt.Printf("%v\n", location)
+	}
+}
+
+func TestMysql_FindTag(t *testing.T) {
+	database := NewMysql()
+	defer database.db.Close()
+	location := Models.NewWheelchairRentalLocation()
+	location.LocationId = 1
+	result, err := database.FindTag(location)
 	if err != nil {
 		panic(err)
 	}
