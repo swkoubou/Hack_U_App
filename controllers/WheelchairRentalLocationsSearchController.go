@@ -20,7 +20,7 @@ func NewWheelchairRentalLocationsSearchController(app *Applications.WheelchairRe
 	return &WheelchairRentalLocationsSearchController{app: app}
 }
 
-func (controller WheelchairRentalLocationsSearchController) SearchRange(c *gin.Context) {
+func (controller WheelchairRentalLocationsSearchController) GetAllLocations(c *gin.Context) {
 	locations, err := controller.app.GetAllLocation()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

@@ -22,7 +22,7 @@ func main() {
 		})
 	})
 
-	router.GET("/allLocation", controller.SearchRange)
+	router.GET("/allLocation", controller.GetAllLocations)
 
 	router.GET("/search", controller.SearchTags)
 
