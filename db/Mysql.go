@@ -74,6 +74,34 @@ func (mysql *Mysql) FindAllLocation() (locations []*Models.WheelchairRentalLocat
 	return locations, nil
 }
 
+func (mysql *Mysql) FindOneLocation(locationId uint64) (location *Models.WheelchairRentalLocation, err error) {
+	query := `SELECT location_id, name, x(location), y(location), address_supplement, address, phone_number, email, web_site_url
+FROM wheelchair_rental_Locations WHERE Location_id = ?;`
+	stmt, err := mysql.db.Prepare(query)
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+	rows, err := stmt.Query(locationId)
+	defer rows.Close()
+	location = Models.NewWheelchairRentalLocation()
+	err = stmt.QueryRow(locationId).Scan(
+		&location.LocationId,
+		&location.Name,
+		&location.Location.Lng,
+		&location.Location.Lat,
+		&location.AddressSupplement,
+		&location.Address,
+		&location.PhoneNumber,
+		&location.Email,
+		&location.WebSiteUrl)
+	if err != nil {
+		return nil, err
+	}
+	return location, nil
+
+}
+
 func (mysql *Mysql) FindTags(tagIds []uint64) (locations []*Models.WheelchairRentalLocation, err error) {
 	query := `SELECT distinct wheelchair_rental_Locations.location_id, name, x(location), y(location), address_supplement, address, phone_number, email, web_site_url
 FROM wheelchair_rental_Locations
