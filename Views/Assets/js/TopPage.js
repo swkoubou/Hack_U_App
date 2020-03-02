@@ -36,7 +36,7 @@ function addrefineformtag() {
                 tagcheck[i].type = "checkbox";
                 tagcheck[i].value = myjson.tags[i].TagId;
                 tagcheck[i].id = myjson.tags[i].Name;
-                //tagcheck[i].classList.add("hide");
+                tagcheck[i].classList.add("hide");
                 
                 taglabel[i].htmlFor = myjson.tags[i].Name;
                 taglabel[i].innerHTML = myjson.tags[i].Name;
@@ -44,6 +44,9 @@ function addrefineformtag() {
                 
                 form.appendChild(tagcheck[i]);
                 form.appendChild(taglabel[i]);
+                taglabel[i].onclick = function (event) {
+                    event.target.classList.toggle("select");
+                }
             }
     });
 }addrefineformtag();
