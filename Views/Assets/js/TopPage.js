@@ -43,7 +43,7 @@ function addrefineformtag() {
                 taglabel[i].classList.add("taglabel");
                 
                 form.appendChild(tagcheck[i]);
-                form.appendChild(taglabel[i])
+                form.appendChild(taglabel[i]);
             }
     });
 }addrefineformtag();
