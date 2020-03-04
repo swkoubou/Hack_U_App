@@ -20,7 +20,7 @@ func NewWheelchairRentalLocationsSearchController(app *Applications.WheelchairRe
 	return &WheelchairRentalLocationsSearchController{app: app}
 }
 
-func (controller WheelchairRentalLocationsSearchController) SearchRange(c *gin.Context) {
+func (controller *WheelchairRentalLocationsSearchController) SearchRange(c *gin.Context) {
 	locations, err := controller.app.GetAllLocation()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -33,7 +33,7 @@ func (controller WheelchairRentalLocationsSearchController) SearchRange(c *gin.C
 	})
 }
 
-func (controller WheelchairRentalLocationsSearchController) SearchTags(c *gin.Context) {
+func (controller *WheelchairRentalLocationsSearchController) SearchTags(c *gin.Context) {
 	tags, err := purseTags(c.Query("tags"))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -54,7 +54,7 @@ func (controller WheelchairRentalLocationsSearchController) SearchTags(c *gin.Co
 
 }
 
-func (controller WheelchairRentalLocationsSearchController) GetAllTags(c *gin.Context) {
+func (controller *WheelchairRentalLocationsSearchController) GetAllTags(c *gin.Context) {
 	tags, err := controller.app.GetAllTags()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
