@@ -1,6 +1,6 @@
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-#area {
+#Area {
     height: calc(100% - 50px);
 }
 /* Optional: Makes the sample page fill the window. */
@@ -19,39 +19,42 @@ header{
 ul{
     list-style: none;
 }
-.container{
+.Container{
     height: 100%;
 }
-.push{
+#LeftPadding{
     margin-left: auto;
     display: flex;
 }
-.headbutton{
+.HeadButton{
     /*margin-left: auto;*/
     padding: 0 10px;
 }
-.menu{
+#Menu{
     position: fixed;
     height: 100%;
     width: 100%;
     z-index: 100;
     background: white;
 }
-.refine{
+#TagFilter{
     position: fixed;
     height: 50%;
     width: 100%;
     z-index: 100;
     background: white;
+}
+#TagFilter form{
+    height: 100%;
     display: flex;
 }
-.taglabel{
+.TagLabel{
     margin: 0 5px;
     height: 2em;
 }
-.hide{
+body .Hide{
     display: none;
 }
-.select{
+.Select{
     background: lightskyblue;
 }

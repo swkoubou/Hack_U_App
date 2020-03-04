@@ -1,24 +1,18 @@
-function menu() {
-    const button = document.getElementById("menubutton");
-    const menu = document.querySelector('.menu');
+function HeaderButton(HeadButtonId,displayPageId) {
+    const button = document.querySelector("#" + HeadButtonId);
+    const menu = document.querySelector("#"+ displayPageId);
 
-    button.addEventListener('click',function () {
-        menu.classList.toggle('hide');
+    button.addEventListener("click",function () {
+        menu.classList.toggle("Hide");
     });
 }
-menu();
-function refine() {
-    const button = document.getElementById("refinebutton");
-    const menu = document.querySelector('.refine');
 
-    button.addEventListener('click',function () {
-        menu.classList.toggle('hide');
-    });
-}
-refine();
-function addrefineformtag() {
+HeaderButton("MenuButton","Menu");
+HeaderButton("TagFilterButton","TagFilter");
+
+function AddFilterFormTag() {
     var alltagjson = "http://localhost:8080/allTag";
-    const form = document.querySelector(".refine");
+    const form = document.querySelector("#TagFilter form");
     fetch(alltagjson)
         .then(function (response) {
             return response.json();
@@ -26,8 +20,8 @@ function addrefineformtag() {
         .then(function (myjson){
             var i;
             var quantity = Object.keys(myjson.tags).length;
-            var tagcheck = {};
-            var taglabel = {};
+            var tagcheck = [];
+            var taglabel = [];
 
             for (i = 0;i < quantity;i++){
                 tagcheck[i] = document.createElement("input");
@@ -36,17 +30,18 @@ function addrefineformtag() {
                 tagcheck[i].type = "checkbox";
                 tagcheck[i].value = myjson.tags[i].TagId;
                 tagcheck[i].id = myjson.tags[i].Name;
-                tagcheck[i].classList.add("hide");
+                tagcheck[i].classList.add("Hide");
                 
                 taglabel[i].htmlFor = myjson.tags[i].Name;
                 taglabel[i].innerHTML = myjson.tags[i].Name;
-                taglabel[i].classList.add("taglabel");
+                taglabel[i].classList.add("TagLabel");
                 
                 form.appendChild(tagcheck[i]);
                 form.appendChild(taglabel[i]);
                 taglabel[i].onclick = function (event) {
-                    event.target.classList.toggle("select");
+                    event.target.classList.toggle("Select");
                 }
             }
     });
-}addrefineformtag();
+}
+AddFilterFormTag();
