@@ -11,6 +11,7 @@ import (
 
 const decimalNumber = 10
 const bit32 = 32
+const bit64 = 64
 
 type WheelchairRentalLocationsSearchController struct {
 	app *Applications.WheelchairRentalLocationsSearchApplication
@@ -20,7 +21,7 @@ func NewWheelchairRentalLocationsSearchController(app *Applications.WheelchairRe
 	return &WheelchairRentalLocationsSearchController{app: app}
 }
 
-func (controller WheelchairRentalLocationsSearchController) SearchRange(c *gin.Context) {
+func (controller WheelchairRentalLocationsSearchController) GetAllLocations(c *gin.Context) {
 	locations, err := controller.app.GetAllLocation()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -30,6 +31,42 @@ func (controller WheelchairRentalLocationsSearchController) SearchRange(c *gin.C
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"locations": locations,
+	})
+}
+func (controller WheelchairRentalLocationsSearchController) GetPage(c *gin.Context) {
+	rowPageId := c.Query("p")
+	pageId, err := strconv.ParseUint(rowPageId, decimalNumber, bit64)
+	if err != nil {
+		if enum, ok := err.(*strconv.NumError); ok {
+			switch enum.Err {
+			case strconv.ErrRange:
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"error": errors.New("値が自然数で無いか大きすぎる値です{" + rowPageId + "}"),
+				})
+				return
+			case strconv.ErrSyntax:
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"error": errors.New("数値に変換できませんでした{" + rowPageId + "}"),
+				})
+				return
+			}
+		}
+	}
+	pageData, err := controller.app.GetLocationDetail(pageId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	c.HTML(http.StatusOK, "detail.html", gin.H{
+		"Name":              pageData.Name,
+		"Address":           pageData.Address,
+		"AddressSupplement": pageData.AddressSupplement,
+		"PhoneNumber":       pageData.StringPhoneNumber(),
+		"Email":             pageData.StringEmail(),
+		"WebSiteUrl":        pageData.StringWebSiteUrl(),
+		"Tag":				pageData.Tag,
 	})
 }
 
