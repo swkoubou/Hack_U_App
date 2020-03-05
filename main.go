@@ -3,14 +3,14 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/swkoubou/Hack_U_App/Applications"
-	"github.com/swkoubou/Hack_U_App/controllers"
+	"github.com/swkoubou/Hack_U_App/Controllers"
 	"github.com/swkoubou/Hack_U_App/db"
 	"net/http"
 	"os"
 )
 
 func main() {
-	controller := controllers.NewWheelchairRentalLocationsSearchController(Applications.NewWheelchairRentalLocationsSearchApplication(db.NewMysql()))
+	controller := Controllers.NewWheelchairRentalLocationsSearchController(Applications.NewWheelchairRentalLocationsSearchApplication(db.NewMysql()))
 	router := gin.Default()
 
 	router.Static("./Assets", "./Views/Assets")
