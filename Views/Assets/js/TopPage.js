@@ -10,17 +10,19 @@ HeaderButton("MenuButton","Menu");
 HeaderButton("TagFilterButton","TagFilter");
 
 class Tag {
-    constructor(TagJson,TagNum) {
+    constructor(TagId,TagName) {
         this.Checkbox = document.createElement("input");
         this.Label = document.createElement("label");
         this.Checkbox.type = "checkbox";
         this.Checkbox.classList.add("Hide");
-        this.Checkbox.value = TagJson.tags[TagNum].TagId;
-        const TagName = TagJson.tags[TagNum].Name;
+        this.Checkbox.value = TagId;
         this.Checkbox.id = TagName;
         this.Label.classList.add("TagLabel");
         this.Label.htmlFor = TagName;
         this.Label.innerHTML = TagName;
+        this.Label.onclick = function (event) {
+            event.target.classList.toggle("Select");
+        }
 
     }
 }
@@ -37,13 +39,10 @@ function AddFilterFormTag() {
             const Tags = [];
 
             for (let i = 0;i < TagQuantity;i++){
-                Tags[i] = new Tag(TagJson,i);
+                Tags[i] = new Tag(TagJson.tags[i].TagId,TagJson.tags[i].Name);
 
                 Form.appendChild(Tags[i].Checkbox);
                 Form.appendChild(Tags[i].Label);
-                Tags[i].Label.onclick = function (event) {
-                    event.target.classList.toggle("Select");
-                }
             }
     });
 }
