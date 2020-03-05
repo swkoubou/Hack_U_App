@@ -27,16 +27,16 @@ function AddFilterFormTag() {
             return response.json();
         })
         .then(function (TagJson){
-            const TagQuantity = Object.keys(MyJson.tags).length;
+            const TagQuantity = Object.keys(TagJson.tags).length;
             const Tags = [];
 
             for (let i = 0;i < TagQuantity;i++){
                 Tags[i] = new Tag();
-                Tags[i].Checkbox.value = MyJson.tags[i].TagId;
-                Tags[i].Checkbox.id = MyJson.tags[i].Name;
+                Tags[i].Checkbox.value = TagJson.tags[i].TagId;
+                Tags[i].Checkbox.id = TagJson.tags[i].Name;
 
-                Tags[i].Label.htmlFor = MyJson.tags[i].Name;
-                Tags[i].Label.innerHTML = MyJson.tags[i].Name;
+                Tags[i].Label.htmlFor = TagJson.tags[i].Name;
+                Tags[i].Label.innerHTML = TagJson.tags[i].Name;
 
                 form.appendChild(tags[i].Checkbox);
                 form.appendChild(tags[i].Label);
