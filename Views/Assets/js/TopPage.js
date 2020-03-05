@@ -6,39 +6,41 @@ function HeaderButton(HeadButtonId,displayPageId) {
         menu.classList.toggle("Hide");
     });
 }
-
 HeaderButton("MenuButton","Menu");
 HeaderButton("TagFilterButton","TagFilter");
 
+class Tag {
+    constructor() {
+        this.Checkbox = document.createElement("input");
+        this.Label = document.createElement("label");
+        this.Checkbox.type = "checkbox";
+        this.Checkbox.classList.add("Hide");
+        this.Label.classList.add("TagLabel");
+    }
+}
+
 function AddFilterFormTag() {
-    var alltagjson = "http://localhost:8080/allTag";
+    const AllTagJson = "http://localhost:8080/allTag";
     const form = document.querySelector("#TagFilter form");
-    fetch(alltagjson)
+    fetch(AllTagJson)
         .then(function (response) {
             return response.json();
         })
         .then(function (myjson){
-            var i;
-            var quantity = Object.keys(myjson.tags).length;
-            var tagcheck = [];
-            var taglabel = [];
+            const quantity = Object.keys(myjson.tags).length;
+            const tags = [];
 
-            for (i = 0;i < quantity;i++){
-                tagcheck[i] = document.createElement("input");
-                taglabel[i] = document.createElement("label");
+            for (let i = 0;i < quantity;i++){
+                tags[i] = new Tag();
+                tags[i].Checkbox.value = myjson.tags[i].TagId;
+                tags[i].Checkbox.id = myjson.tags[i].Name;
+
+                tags[i].Label.htmlFor = myjson.tags[i].Name;
+                tags[i].Label.innerHTML = myjson.tags[i].Name;
                 
-                tagcheck[i].type = "checkbox";
-                tagcheck[i].value = myjson.tags[i].TagId;
-                tagcheck[i].id = myjson.tags[i].Name;
-                tagcheck[i].classList.add("Hide");
-                
-                taglabel[i].htmlFor = myjson.tags[i].Name;
-                taglabel[i].innerHTML = myjson.tags[i].Name;
-                taglabel[i].classList.add("TagLabel");
-                
-                form.appendChild(tagcheck[i]);
-                form.appendChild(taglabel[i]);
-                taglabel[i].onclick = function (event) {
+                form.appendChild(tags[i].Checkbox);
+                form.appendChild(tags[i].Label);
+                tags[i].Label.onclick = function (event) {
                     event.target.classList.toggle("Select");
                 }
             }
