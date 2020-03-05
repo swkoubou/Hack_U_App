@@ -26,21 +26,21 @@ function AddFilterFormTag() {
         .then(function (response) {
             return response.json();
         })
-        .then(function (myjson){
-            const quantity = Object.keys(myjson.tags).length;
-            const tags = [];
+        .then(function (TagJson){
+            const TagQuantity = Object.keys(MyJson.tags).length;
+            const Tags = [];
 
-            for (let i = 0;i < quantity;i++){
-                tags[i] = new Tag();
-                tags[i].Checkbox.value = myjson.tags[i].TagId;
-                tags[i].Checkbox.id = myjson.tags[i].Name;
+            for (let i = 0;i < TagQuantity;i++){
+                Tags[i] = new Tag();
+                Tags[i].Checkbox.value = MyJson.tags[i].TagId;
+                Tags[i].Checkbox.id = MyJson.tags[i].Name;
 
-                tags[i].Label.htmlFor = myjson.tags[i].Name;
-                tags[i].Label.innerHTML = myjson.tags[i].Name;
-                
+                Tags[i].Label.htmlFor = MyJson.tags[i].Name;
+                Tags[i].Label.innerHTML = MyJson.tags[i].Name;
+
                 form.appendChild(tags[i].Checkbox);
                 form.appendChild(tags[i].Label);
-                tags[i].Label.onclick = function (event) {
+                Tags[i].Label.onclick = function (event) {
                     event.target.classList.toggle("Select");
                 }
             }
