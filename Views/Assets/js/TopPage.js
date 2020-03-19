@@ -8,6 +8,7 @@ function HeaderButton(HeadButtonId,displayPageId) {
 }
 HeaderButton("MenuButton","Menu");
 HeaderButton("TagFilterButton","TagFilter");
+HeaderButton("SearchBox-Button","SearchBox");
 
 class Tag {
     constructor(TagId,TagName) {

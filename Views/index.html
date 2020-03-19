@@ -13,6 +13,7 @@
         <div id="LeftPadding">
             <div id="TagFilterButton" class="HeadButton">V</div>
             <div id="MenuButton" class="HeadButton">+</div>
+            <div id="SearchBox-Button">🔍</div>
         </div>
 
     </header>
@@ -25,11 +26,14 @@
     <div id="TagFilter" class="Hide">
         <form> </form>
     </div>
+    <div id="SearchBox" class="Hide">
+        <input id="SearchBox-Input" type="text"/>
+    </div>
 
     <div id="Area"></div>
 </div>
 <script type="text/javascript" src="Assets/js/Map.js"></script>
 <script type="text/javascript" src="Assets/js/TopPage.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ .API_KEY }}&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ .API_KEY }}&callback=initMap&libraries=places" async defer></script>
 </body>
 </html>

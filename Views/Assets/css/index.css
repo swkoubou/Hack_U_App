@@ -52,6 +52,18 @@ ul{
     margin: 0 5px;
     height: 2em;
 }
+#SearchBox {
+    z-index: 100;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+}
+#SearchBox-Input{
+    font-size: 18px;
+    width: 95%;
+    margin-left: 2.5%;
+
+}
 body .Hide{
     display: none;
 }
