@@ -1,4 +1,4 @@
-package controllers
+package Controllers
 
 import (
 	"errors"
@@ -21,7 +21,7 @@ func NewWheelchairRentalLocationsSearchController(app *Applications.WheelchairRe
 	return &WheelchairRentalLocationsSearchController{app: app}
 }
 
-func (controller WheelchairRentalLocationsSearchController) GetAllLocations(c *gin.Context) {
+func (controller *WheelchairRentalLocationsSearchController) GetAllLocations(c *gin.Context) {
 	locations, err := controller.app.GetAllLocation()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -33,7 +33,7 @@ func (controller WheelchairRentalLocationsSearchController) GetAllLocations(c *g
 		"locations": locations,
 	})
 }
-func (controller WheelchairRentalLocationsSearchController) GetPage(c *gin.Context) {
+func (controller *WheelchairRentalLocationsSearchController) GetPage(c *gin.Context) {
 	rowPageId := c.Query("p")
 	pageId, err := strconv.ParseUint(rowPageId, decimalNumber, bit64)
 	if err != nil {
@@ -70,7 +70,7 @@ func (controller WheelchairRentalLocationsSearchController) GetPage(c *gin.Conte
 	})
 }
 
-func (controller WheelchairRentalLocationsSearchController) SearchTags(c *gin.Context) {
+func (controller *WheelchairRentalLocationsSearchController) SearchTags(c *gin.Context) {
 	tags, err := purseTags(c.Query("tags"))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -91,7 +91,7 @@ func (controller WheelchairRentalLocationsSearchController) SearchTags(c *gin.Co
 
 }
 
-func (controller WheelchairRentalLocationsSearchController) GetAllTags(c *gin.Context) {
+func (controller *WheelchairRentalLocationsSearchController) GetAllTags(c *gin.Context) {
 	tags, err := controller.app.GetAllTags()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
