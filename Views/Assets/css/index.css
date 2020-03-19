@@ -58,3 +58,12 @@ body .Hide{
 .Select{
     background: lightskyblue;
 }
+#DeterminationButtonDiv{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+}
+#DeterminationButton{
+    width: 40%;
+}

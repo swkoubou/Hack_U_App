@@ -14,6 +14,7 @@ class Tag {
         this.Checkbox = document.createElement("input");
         this.Label = document.createElement("label");
         this.Checkbox.type = "checkbox";
+        this.Checkbox.name = "FilterCheck";
         this.Checkbox.classList.add("Hide");
         this.Checkbox.value = TagId;
         this.Checkbox.id = TagName;
@@ -47,3 +48,14 @@ function AddFilterFormTag() {
     });
 }
 AddFilterFormTag();
+
+function CheckConfirmation(){
+    const Checked = [];
+    const CheckBox = document.FilterForm.FilterCheck;
+    for(let i = 0;i < CheckBox.length;i++){
+        if (CheckBox[i].checked){
+            Checked.push(CheckBox[i].value);
+        }
+    }
+    alert(Checked);
+}
