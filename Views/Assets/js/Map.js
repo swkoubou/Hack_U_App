@@ -15,12 +15,4 @@ function initMap() {
         content: contentString
     });
 
-    const marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: "Hello World!"
-    });
-    marker.addListener("click", function() {
-        infowindow.open(map, marker);
-    });
 }
