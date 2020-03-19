@@ -1,17 +1,22 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/swkoubou/Hack_U_App/Applications"
-	"github.com/swkoubou/Hack_U_App/controllers"
-	Infrastructure "github.com/swkoubou/Hack_U_App/db"
+	"github.com/swkoubou/Hack_U_App/Controllers"
+	"github.com/swkoubou/Hack_U_App/db"
 	"net/http"
 	"os"
 )
 
 func main() {
-	controller := controllers.NewWheelchairRentalLocationsSearchController(Applications.NewWheelchairRentalLocationsSearchApplication(Infrastructure.NewMysql()))
+	controller := Controllers.NewWheelchairRentalLocationsSearchController(Applications.NewWheelchairRentalLocationsSearchApplication(db.NewMysql()))
 	router := gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+	router.Use(cors.New(config))
 
 	router.Static("./Assets", "./Views/Assets")
 	router.LoadHTMLGlob("Views/*.html")
@@ -22,11 +27,13 @@ func main() {
 		})
 	})
 
-	router.GET("/allLocation", controller.SearchRange)
+	router.GET("/Page", controller.GetPage)
+
+	router.GET("/allLocation", controller.GetAllLocations)
 
 	router.GET("/search", controller.SearchTags)
 
 	router.GET("/allTag", controller.GetAllTags)
-	
+
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

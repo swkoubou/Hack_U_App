@@ -11,6 +11,7 @@ type WheelchairRentalLocation struct {
 	PhoneNumber       *sql.NullString // 電話番号
 	Email             *sql.NullString // メールアドレス
 	WebSiteUrl        *sql.NullString // webサイト
+	Tag               []*Tag          // 持ってるタグ
 }
 
 func NewWheelchairRentalLocation() *WheelchairRentalLocation {
@@ -23,5 +24,29 @@ func NewWheelchairRentalLocation() *WheelchairRentalLocation {
 		PhoneNumber:       &sql.NullString{},
 		Email:             &sql.NullString{},
 		WebSiteUrl:        &sql.NullString{},
+	}
+}
+
+func (w *WheelchairRentalLocation) StringPhoneNumber() string {
+	if w.PhoneNumber != nil {
+		return w.PhoneNumber.String
+	} else {
+		return ""
+	}
+}
+
+func (w *WheelchairRentalLocation) StringEmail() string {
+	if w.Email != nil {
+		return w.Email.String
+	} else {
+		return ""
+	}
+}
+
+func (w *WheelchairRentalLocation) StringWebSiteUrl() string {
+	if w.WebSiteUrl != nil {
+		return w.WebSiteUrl.String
+	} else {
+		return ""
 	}
 }
