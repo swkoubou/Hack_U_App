@@ -21,7 +21,7 @@ func NewWheelchairRentalLocationsSearchController(app *Applications.WheelchairRe
 	return &WheelchairRentalLocationsSearchController{app: app}
 }
 
-func (controller *WheelchairRentalLocationsSearchController) GetAllLocations(c *gin.Context) {
+func (controller WheelchairRentalLocationsSearchController) GetAllLocations(c *gin.Context) {
 	locations, err := controller.app.GetAllLocation()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -33,7 +33,7 @@ func (controller *WheelchairRentalLocationsSearchController) GetAllLocations(c *
 		"locations": locations,
 	})
 }
-func (controller *WheelchairRentalLocationsSearchController) GetPage(c *gin.Context) {
+func (controller WheelchairRentalLocationsSearchController) GetPage(c *gin.Context) {
 	rowPageId := c.Query("p")
 	pageId, err := strconv.ParseUint(rowPageId, decimalNumber, bit64)
 	if err != nil {
