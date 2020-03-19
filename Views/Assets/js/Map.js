@@ -1,7 +1,9 @@
 function initMap() {
-    let myLatLng = {lat: 35.487027, lng: 139.342440};
-    const map = new google.maps.Map(document.getElementById("Area"), {
-        center: myLatLng,
+
+    //マップの追加
+    const KanagawakoukaLocation = {lat: 35.486555, lng: 139.343255};
+    const map = new google.maps.Map(document.querySelector("#Area"), {
+        center: KanagawakoukaLocation,
         zoom: 18
     });
 
