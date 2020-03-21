@@ -1,9 +1,9 @@
 function HeaderButton(HeadButtonId,displayPageId) {
-    const button = document.querySelector("#" + HeadButtonId);
-    const menu = document.querySelector("#"+ displayPageId);
+    const Button = document.querySelector("#" + HeadButtonId);
+    const Menu = document.querySelector("#"+ displayPageId);
 
-    button.addEventListener("click",function () {
-        menu.classList.toggle("Hide");
+    Button.addEventListener("click",function () {
+        Menu.classList.toggle("Hide");
     });
 }
 HeaderButton("MenuButton","Menu");
@@ -29,9 +29,9 @@ class Tag {
 }
 
 function AddFilterFormTag() {
-    const AllTagJson = "http://localhost:8080/allTag";
+    const AllTagURL = "http://localhost:8080/allTag";
     const Form = document.querySelector("#TagFilter form");
-    fetch(AllTagJson)
+    fetch(AllTagURL)
         .then(function (response) {
             return response.json();
         })
@@ -45,7 +45,7 @@ function AddFilterFormTag() {
                 Form.appendChild(Tags[i].Checkbox);
                 Form.appendChild(Tags[i].Label);
             }
-    });
+        });
 }
 AddFilterFormTag();
 
@@ -57,5 +57,19 @@ function CheckConfirmation(){
             Checked.push(CheckBox[i].value);
         }
     }
-    alert(Checked);
+    return Checked.join(",");
+}
+function FilteringDisplay() {
+    const SelectTag = CheckConfirmation();
+    const SearchTagsURL = "http://localhost:8080/search?tags=";
+    const Menu =document.querySelector("#TagFilter");
+    fetch(SearchTagsURL + SelectTag)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (FilteredJson) {
+            console.log(FilteredJson);
+            console.log("SelectTagId: " + SelectTag);
+        });
+    Menu.classList.add("Hide");
 }
