@@ -1,13 +1,23 @@
-function HeaderButton(HeadButtonId,displayPageId) {
+function HeaderButton(HeadButtonId, HeaderItemId) {
     const Button = document.querySelector("#" + HeadButtonId);
-    const Menu = document.querySelector("#"+ displayPageId);
+    const HeaderItem = document.querySelector("#" + HeaderItemId);
+    HeaderItem.classList.add("HeaderItem");
 
-    Button.addEventListener("click",function () {
-        Menu.classList.toggle("Hide");
+    Button.addEventListener("click", function () {
+        const HeaderItems = document.querySelectorAll(".HeaderItem");
+        if (HeaderItem.classList.contains("Hide")) {
+            HeaderItems.forEach(value => value.classList.add("Hide"));
+            HeaderItem.classList.remove("Hide");
+        } else {
+            HeaderItem.classList.add("Hide");
+        }
+
     });
 }
-HeaderButton("MenuButton","Menu");
-HeaderButton("TagFilterButton","TagFilter");
+
+HeaderButton("MenuButton", "Menu");
+HeaderButton("TagFilterButton", "TagFilter");
+HeaderButton("SearchBox-Button", "SearchBox");
 
 class Tag {
     constructor(TagId,TagName) {
