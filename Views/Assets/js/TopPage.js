@@ -1,14 +1,3 @@
-function HeaderButton(HeadButtonId,displayPageId) {
-    const Button = document.querySelector("#" + HeadButtonId);
-    const Menu = document.querySelector("#"+ displayPageId);
-
-    Button.addEventListener("click",function () {
-        Menu.classList.toggle("Hide");
-    });
-}
-HeaderButton("MenuButton","Menu");
-HeaderButton("TagFilterButton","TagFilter");
-
 class Tag {
     constructor(TagId,TagName) {
         this.Checkbox = document.createElement("input");
@@ -27,6 +16,26 @@ class Tag {
 
     }
 }
+
+class LocationInformation{
+    constructor(Json) {
+        this.Position = Json.Location;
+        this.Name = Json.Name;
+        this.Address = Json.Address;
+        this.DetailedPage = "/Page?p="+Json.LocationId;
+    }
+}
+
+function HeaderButton(HeadButtonId,displayPageId) {
+    const Button = document.querySelector("#" + HeadButtonId);
+    const Menu = document.querySelector("#"+ displayPageId);
+
+    Button.addEventListener("click",function () {
+        Menu.classList.toggle("Hide");
+    });
+}
+HeaderButton("MenuButton","Menu");
+HeaderButton("TagFilterButton","TagFilter");
 
 function AddFilterFormTag() {
     const AllTagURL = "http://localhost:8080/allTag";
@@ -59,6 +68,7 @@ function CheckConfirmation(){
     }
     return Checked.join(",");
 }
+
 function FilteringDisplay() {
     const SelectTag = CheckConfirmation();
     const SearchTagsURL = "http://localhost:8080/search?tags=";
@@ -68,8 +78,14 @@ function FilteringDisplay() {
             return response.json();
         })
         .then(function (FilteredJson) {
-            console.log(FilteredJson);
+            const LocationQuantity = Object.keys(FilteredJson.location).length;
+            const LocationInformations = [];
+            for (let i = 0;i < LocationQuantity;i++){
+                LocationInformations[i] = new LocationInformation(FilteredJson.location[i]);
+            }
+            console.log(LocationInformations.length);
             console.log("SelectTagId: " + SelectTag);
         });
     Menu.classList.add("Hide");
+    //名前、住所、詳細ページのURL
 }

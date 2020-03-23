@@ -5,7 +5,7 @@ function initMap() {
         zoom: 18
     });
 
-    let contentString = "<p>storename</p>"+
+    /*let contentString = "<p>storename</p>"+
         "<p>text</p>"+
         "<a href='https://google.com'>Go google!</a>";
 
@@ -20,5 +20,5 @@ function initMap() {
     });
     marker.addListener("click", function() {
         infowindow.open(map, marker);
-    });
+    });*/
 }
