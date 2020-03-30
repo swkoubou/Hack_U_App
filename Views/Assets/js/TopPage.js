@@ -119,7 +119,6 @@ function InitMarker(LocationInformations) {
                 "<p>"+LocationInformations[i].Address+"</p>"+
                 "<a href=\'"+LocationInformations[i].DetailedPage+"\'>詳細ページ</>"
         };
-        alert(LocationInformations[i].Position.Lat);
         Markers[i] = new google.maps.Marker(MarkersInformation);
         InfoWindows[i] = new google.maps.InfoWindow(ContentString);
         Markers[i].addListener("click", function() {
