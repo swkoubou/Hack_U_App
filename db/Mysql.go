@@ -53,8 +53,8 @@ func (mysql *Mysql) FindAllLocation() (locations []*Models.WheelchairRentalLocat
 		err := rows.Scan(
 			&location.LocationId,
 			&location.Name,
-			&location.Location.Lng,
 			&location.Location.Lat,
+			&location.Location.Lng,
 			&location.AddressSupplement,
 			&location.Address,
 			&location.PhoneNumber,
@@ -86,8 +86,8 @@ FROM wheelchair_rental_Locations WHERE Location_id = ?;`
 	err = stmt.QueryRow(locationId).Scan(
 		&location.LocationId,
 		&location.Name,
-		&location.Location.Lng,
 		&location.Location.Lat,
+		&location.Location.Lng,
 		&location.AddressSupplement,
 		&location.Address,
 		&location.PhoneNumber,
