@@ -83,9 +83,36 @@ function FilteringDisplay() {
             for (let i = 0;i < LocationQuantity;i++){
                 LocationInformations[i] = new LocationInformation(FilteredJson.location[i]);
             }
-            console.log(LocationInformations.length);
+            console.log(LocationInformations);
             console.log("SelectTagId: " + SelectTag);
+            InitMarker(LocationInformations);
         });
     Menu.classList.add("Hide");
     //名前、住所、詳細ページのURL
+}
+
+let map;
+function initMap() {
+    let myLatLng = {lat: 35.487027, lng: 139.342440};
+    map = new google.maps.Map(document.getElementById("Area"), {
+        center: myLatLng,
+        zoom: 18
+    });
+}
+
+function InitMarker(LocationInformations) {
+    let Markers = [];
+    let MarkersInformation;
+    for (let i = 0;i < LocationInformations.length;i++){
+        MarkersInformation ={
+            position: {lat: 35.487027, lng: 139.342440}/*{
+                lat: LocationInformations[i].Position.Lat,
+                lng: LocationInformations[i].Position.Lng
+            }*/,
+            map: map,
+            title: LocationInformations[i].Name
+        };
+        alert(LocationInformations[i].Position.Lat);
+        Markers[i] = new google.maps.Marker(MarkersInformation);
+    }
 }
