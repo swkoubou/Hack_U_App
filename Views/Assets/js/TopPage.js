@@ -103,16 +103,27 @@ function initMap() {
 function InitMarker(LocationInformations) {
     let Markers = [];
     let MarkersInformation;
+    let InfoWindows = [];
+    let ContentString;
     for (let i = 0;i < LocationInformations.length;i++){
         MarkersInformation ={
-            position: {lat: 35.487027, lng: 139.342440}/*{
+            position: {
                 lat: LocationInformations[i].Position.Lat,
                 lng: LocationInformations[i].Position.Lng
-            }*/,
+            },
             map: map,
             title: LocationInformations[i].Name
         };
+        ContentString ={
+            content: "<p>"+LocationInformations[i].Name+"</p>"+
+                "<p>"+LocationInformations[i].Address+"</p>"+
+                "<a href=\'"+LocationInformations[i].DetailedPage+"\'>詳細ページ</>"
+        };
         alert(LocationInformations[i].Position.Lat);
         Markers[i] = new google.maps.Marker(MarkersInformation);
+        InfoWindows[i] = new google.maps.InfoWindow(ContentString);
+        Markers[i].addListener("click", function() {
+            InfoWindows[i].open(map, Markers[i]);
+        });
     }
 }
