@@ -34,20 +34,6 @@ func TestMysql_FindOneLocation(t *testing.T) {
 	fmt.Printf("%v\n", location)
 }
 
-func TestMysql_FindTags(t *testing.T) {
-	database := NewMysql()
-	defer database.db.Close()
-
-	result, err := database.FindTags([]uint64{2, 3})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(len(result))
-	for _, location := range result {
-		fmt.Printf("%v\n", location)
-	}
-}
-
 func TestMysql_FindAllTags(t *testing.T) {
 	database := NewMysql()
 	defer database.db.Close()

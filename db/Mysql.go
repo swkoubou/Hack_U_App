@@ -6,8 +6,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/swkoubou/Hack_U_App/Models"
 	"os"
-	"strconv"
-	"strings"
 	"unicode/utf8"
 )
 
@@ -55,8 +53,8 @@ func (mysql *Mysql) FindAllLocation() (locations []*Models.WheelchairRentalLocat
 		err := rows.Scan(
 			&location.LocationId,
 			&location.Name,
-			&location.Location.Lng,
 			&location.Location.Lat,
+			&location.Location.Lng,
 			&location.AddressSupplement,
 			&location.Address,
 			&location.PhoneNumber,
@@ -88,8 +86,8 @@ FROM wheelchair_rental_Locations WHERE Location_id = ?;`
 	err = stmt.QueryRow(locationId).Scan(
 		&location.LocationId,
 		&location.Name,
-		&location.Location.Lng,
 		&location.Location.Lat,
+		&location.Location.Lng,
 		&location.AddressSupplement,
 		&location.Address,
 		&location.PhoneNumber,
@@ -102,42 +100,6 @@ FROM wheelchair_rental_Locations WHERE Location_id = ?;`
 
 }
 
-func (mysql *Mysql) FindTags(tagIds []uint64) (locations []*Models.WheelchairRentalLocation, err error) {
-	query := `SELECT distinct wheelchair_rental_Locations.location_id, name, x(location), y(location), address_supplement, address, phone_number, email, web_site_url
-FROM wheelchair_rental_Locations
-         JOIN wheelchair_rental_Locations_tag ON wheelchair_rental_Locations.Location_id = wheelchair_rental_Locations_tag.Location_id
-         JOIN tag ON tag.tag_id = wheelchair_rental_Locations_tag.tag_id
-WHERE tag.tag_id IN (?);`
-	stmt, err := mysql.db.Prepare(query)
-	if err != nil {
-		return nil, err
-	}
-	defer stmt.Close()
-	rows, err := stmt.Query(tagQueryBuilder(tagIds))
-	defer rows.Close()
-	for rows.Next() {
-		location := Models.NewWheelchairRentalLocation()
-		err := rows.Scan(
-			&location.LocationId,
-			&location.Name,
-			&location.Location.Lng,
-			&location.Location.Lat,
-			&location.AddressSupplement,
-			&location.Address,
-			&location.PhoneNumber,
-			&location.Email,
-			&location.WebSiteUrl)
-		if err != nil {
-			return nil, err
-		}
-		locations = append(locations, location)
-	}
-
-	if err != nil {
-		return nil, err
-	}
-	return locations, nil
-}
 
 func (mysql *Mysql) FindAllTags() (tags []*Models.Tag, err error) {
 	query := `SELECT * FROM tag`
@@ -183,12 +145,4 @@ WHERE Location_id = ?;`
 		tags = append(tags, tag)
 	}
 	return tags, nil
-}
-
-func tagQueryBuilder(tagIds []uint64) (tagQuery string) {
-	var sTagIds []string
-	for _, tag := range tagIds {
-		sTagIds = append(sTagIds, strconv.FormatUint(tag, decimalNumber))
-	}
-	return strings.Join(sTagIds, ",")
 }
