@@ -83,8 +83,6 @@ function FilteringDisplay() {
             for (let i = 0;i < LocationQuantity;i++){
                 LocationInformations[i] = new LocationInformation(FilteredJson.location[i]);
             }
-            console.log(LocationInformations);
-            console.log("SelectTagId: " + SelectTag);
             InitMarker(LocationInformations);
         });
     Menu.classList.add("Hide");
@@ -92,16 +90,17 @@ function FilteringDisplay() {
 }
 
 let map;
+let MarkerArray;
 function initMap() {
     let myLatLng = {lat: 35.487027, lng: 139.342440};
     map = new google.maps.Map(document.getElementById("Area"), {
         center: myLatLng,
         zoom: 18
     });
+    MarkerArray = new google.maps.MVCArray;
 }
 
 function InitMarker(LocationInformations) {
-    let Markers = [];
     let MarkersInformation;
     let InfoWindows = [];
     let ContentString;
@@ -119,10 +118,10 @@ function InitMarker(LocationInformations) {
                 "<p>"+LocationInformations[i].Address+"</p>"+
                 "<a href=\'"+LocationInformations[i].DetailedPage+"\'>詳細ページ</>"
         };
-        Markers[i] = new google.maps.Marker(MarkersInformation);
+        MarkerArray.push(new google.maps.Marker(MarkersInformation));
         InfoWindows[i] = new google.maps.InfoWindow(ContentString);
-        Markers[i].addListener("click", function() {
-            InfoWindows[i].open(map, Markers[i]);
+        MarkerArray.getAt(i).addListener("click", function() {
+            InfoWindows[i].open(map, MarkerArray.getAt(i));
         });
     }
 }
