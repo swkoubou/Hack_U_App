@@ -104,6 +104,11 @@ function InitMarker(LocationInformations) {
     let MarkersInformation;
     let InfoWindows = [];
     let ContentString;
+    MarkerArray.forEach(function (MarkerElement) {
+        MarkerElement.setMap(null);
+    });
+
+    MarkerArray.clear();
     for (let i = 0;i < LocationInformations.length;i++){
         MarkersInformation ={
             position: {
