@@ -73,14 +73,27 @@ function CheckConfirmation() {
 
 function FilteringDisplay() {
     const SelectTag = CheckConfirmation();
-    const SearchTagsURL = "http://localhost:8080/search?tags=";
+    const SearchTagsURL = "/search?tags=";
+    const AllLocation = "/allLocation";
+    let RequestURL = SearchTagsURL + SelectTag;
     const Menu = document.querySelector("#TagFilter");
-    fetch(SearchTagsURL + SelectTag)
+
+    if (SelectTag == "") {
+        RequestURL = AllLocation;
+    }
+    fetch(RequestURL)
         .then(function (response) {
             return response.json();
         })
         .then(function (FilteredJson) {
-            const LocationQuantity = Object.keys(FilteredJson.location).length;
+            if ("error" in FilteredJson) {
+                MarkerArray.forEach(function (MarkerElement) {
+                    MarkerElement.setMap(null);
+                });
+                alert("存在しません");
+                return 0;
+            }
+            const LocationQuantity = Object.keys(FilteredJson.locations).length;
             const LocationInformations = [];
             for (let i = 0; i < LocationQuantity; i++) {
                 LocationInformations[i] = new LocationInformation(FilteredJson.location[i]);
