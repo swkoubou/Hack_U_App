@@ -96,7 +96,7 @@ function FilteringDisplay() {
             const LocationQuantity = Object.keys(FilteredJson.locations).length;
             const LocationInformations = [];
             for (let i = 0; i < LocationQuantity; i++) {
-                LocationInformations[i] = new LocationInformation(FilteredJson.location[i]);
+                LocationInformations[i] = new LocationInformation(FilteredJson.locations[i]);
             }
             InitMarker(LocationInformations);
         });
@@ -113,6 +113,25 @@ function initMap() {
         zoom: 18
     });
     MarkerArray = new google.maps.MVCArray;
+    fetch("/allLocation")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (FilteredJson) {
+            if ("error" in FilteredJson) {
+                MarkerArray.forEach(function (MarkerElement) {
+                    MarkerElement.setMap(null);
+                });
+                alert("存在しません");
+                return 0;
+            }
+            const LocationQuantity = Object.keys(FilteredJson.locations).length;
+            const LocationInformations = [];
+            for (let i = 0; i < LocationQuantity; i++) {
+                LocationInformations[i] = new LocationInformation(FilteredJson.locations[i]);
+            }
+            InitMarker(LocationInformations);
+        });
 }
 
 function InitMarker(LocationInformations) {
