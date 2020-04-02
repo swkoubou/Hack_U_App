@@ -164,3 +164,14 @@ function InitMarker(LocationInformations) {
         });
     }
 }
+
+function CheckReset() {
+    const CheckBox = document.FilterForm.FilterCheck;
+    const Label = document.querySelectorAll(".TagLabel");
+    for (let i = 0; i < CheckBox.length; i++) {
+        Label[i].classList.remove("Select");
+        if (CheckBox[i].checked) {
+            CheckBox[i].checked = false;
+        }
+    }
+}
