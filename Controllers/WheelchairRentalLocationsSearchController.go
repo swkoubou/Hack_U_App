@@ -66,7 +66,7 @@ func (controller *WheelchairRentalLocationsSearchController) GetPage(c *gin.Cont
 		"PhoneNumber":       pageData.StringPhoneNumber(),
 		"Email":             pageData.StringEmail(),
 		"WebSiteUrl":        pageData.StringWebSiteUrl(),
-		"Tag":				pageData.Tag,
+		"Tag":               pageData.Tag,
 	})
 }
 
