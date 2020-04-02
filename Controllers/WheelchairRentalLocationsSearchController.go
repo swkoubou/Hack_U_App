@@ -86,7 +86,7 @@ func (controller *WheelchairRentalLocationsSearchController) SearchTags(c *gin.C
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"location": locations,
+		"locations": locations,
 	})
 
 }
