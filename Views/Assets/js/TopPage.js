@@ -108,9 +108,9 @@ let map;
 let MarkerArray;
 
 function initMap() {
-    let myLatLng = {lat: 35.487027, lng: 139.342440};
+    const KanagawakoukaLocation = {lat: 35.486555, lng: 139.343255};
     map = new google.maps.Map(document.getElementById("Area"), {
-        center: myLatLng,
+        center: KanagawakoukaLocation,
         zoom: 18
     });
     MarkerArray = new google.maps.MVCArray;
