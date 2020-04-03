@@ -37,6 +37,7 @@ function HeaderButton(HeadButtonId, displayPageId) {
 
 HeaderButton("MenuButton", "Menu");
 HeaderButton("TagFilterButton", "TagFilter");
+HeaderButton("SearchBox-Button", "SearchBox");
 
 function AddFilterFormTag() {
     const AllTagURL = "http://localhost:8080/allTag";
