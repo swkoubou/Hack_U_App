@@ -7,21 +7,33 @@
     <link rel="stylesheet" type="text/css" href="Assets/css/index.css">
 </head>
 <body>
-<div class="container">
+<div class="Container">
     <header>
         <p>title</p>
-        <p class="drbutton">+</p>
+        <div id="LeftPadding">
+            <div id="TagFilterButton" class="HeadButton">V</div>
+            <div id="MenuButton" class="HeadButton">+</div>
+        </div>
+
     </header>
-    <nav class="menu hide">
+    <nav id="Menu" class="Hide">
         <ul>
             <li>menu1</li>
             <li>menu2</li>
         </ul>
     </nav>
-    <div id="area"></div>
+    <div id="TagFilter" class="Hide">
+        <form name="FilterForm">
+            <div class="TagButtonDiv">
+                <button type="button" id="DeterminationButton" onclick="FilteringDisplay()">決定</button>
+                <button type="reset" id="ResetButton" onclick="CheckReset()">リセット</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="Area"></div>
 </div>
-<script type="text/javascript" src="Assets/js/map.js"></script>
-<script type="text/javascript" src="Assets/js/toppage.js"></script>
+<script type="text/javascript" src="Assets/js/TopPage.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ .API_KEY }}&callback=initMap" async defer></script>
 </body>
 </html>
