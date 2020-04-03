@@ -70,6 +70,15 @@ body .Hide{
 .Select{
     background: lightskyblue;
 }
+.TagButtonDiv{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+}
+#DeterminationButton{
+    width: 40%;
+}
 .tag {
     position: relative;
     display: inline-block;
