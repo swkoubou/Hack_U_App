@@ -106,6 +106,7 @@ function FilteringDisplay() {
 
 let map;
 let MarkerArray;
+let InfoWindows;
 
 function initMap() {
     const KanagawakoukaLocation = {lat: 35.486555, lng: 139.343255};
@@ -114,6 +115,7 @@ function initMap() {
         zoom: 18
     });
     MarkerArray = new google.maps.MVCArray;
+    InfoWindows = [];
     fetch("/allLocation")
         .then(function (response) {
             return response.json();
@@ -137,7 +139,6 @@ function initMap() {
 
 function InitMarker(LocationInformations) {
     let MarkersInformation;
-    let InfoWindows = [];
     let ContentString;
     MarkerArray.forEach(function (MarkerElement) {
         MarkerElement.setMap(null);
