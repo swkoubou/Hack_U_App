@@ -135,6 +135,30 @@ function initMap() {
             }
             InitMarker(LocationInformations);
         });
+
+    //検索システムの追加
+    const SearchBox = document.querySelector("#SearchBox-Input");
+    const Options = {
+        type: ['establishment'],
+    };
+    const Autocomplete = new google.maps.places.Autocomplete(SearchBox, Options);
+    Autocomplete.bindTo('bounds', map);
+
+    Autocomplete.addListener('place_changed', function () {
+        InfoWindows.forEach(InfoWindow => InfoWindow.close());
+        MarkerArray.forEach(Marker => Marker.setVisible(false));
+        const Place = Autocomplete.getPlace();
+        if (!Place.geometry) {
+            return;
+        }
+        if (Place.geometry.viewport) {
+            map.fitBounds(Place.geometry.viewport);
+        } else {
+            map.setCenter(Place.geometry.location);
+            map.setZoom(18);
+        }
+        MarkerArray.forEach(Marker => Marker.setVisible(true));
+    });
 }
 
 function InitMarker(LocationInformations) {
