@@ -28,7 +28,7 @@ class Tag {
         this.Checkbox.classList.add("Hide");
         this.Checkbox.value = TagId;
         this.Checkbox.id = TagName;
-        this.Label.classList.add("TagLabel");
+        this.Label.classList.add("tag");
         this.Label.htmlFor = TagName;
         this.Label.innerHTML = TagName;
         this.Label.onclick = function (event) {

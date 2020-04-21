@@ -25,9 +25,7 @@
 				<li>ウェブサイト：<a href="{{ .WebSiteUrl }}" target="_self" rel="noreferrer">{{ .WebSiteUrl }}</a></li>
 			</ul>
 			{{ range .Tag }}
-			<input name="{{ .TagId }}" value="{{ .Name }}" type="button" class="tag"
-				onclick="alert('クリックされた値は' + this.value + 'です')">
-			</input>
+			<label class="tag Select" onclick="alert('クリックされた値は' + {{ .TagId }} + 'です')">{{ .Name }} </label>
 			{{ end }}
 			<p><a href="/" target="_self ">トップページに戻る</a></p>
 		</div>
