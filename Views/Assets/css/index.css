@@ -16,6 +16,10 @@ header{
     display: flex;
     align-items: center;
 }
+.HeaderTitle {
+    margin:auto 5px;
+    color: #333;
+}
 ul{
     list-style: none;
 }
