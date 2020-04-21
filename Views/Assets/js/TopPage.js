@@ -1,24 +1,3 @@
-function HeaderButton(HeadButtonId, HeaderItemId) {
-    const Button = document.querySelector("#" + HeadButtonId);
-    const HeaderItem = document.querySelector("#" + HeaderItemId);
-    HeaderItem.classList.add("HeaderItem");
-
-    Button.addEventListener("click", function () {
-        const HeaderItems = document.querySelectorAll(".HeaderItem");
-        if (HeaderItem.classList.contains("Hide")) {
-            HeaderItems.forEach(value => value.classList.add("Hide"));
-            HeaderItem.classList.remove("Hide");
-        } else {
-            HeaderItem.classList.add("Hide");
-        }
-
-    });
-}
-
-HeaderButton("MenuButton", "Menu");
-HeaderButton("TagFilterButton", "TagFilter");
-HeaderButton("SearchBox-Button", "SearchBox");
-
 class Tag {
     constructor(TagId, TagName) {
         this.Checkbox = document.createElement("input");
@@ -46,6 +25,19 @@ class LocationInformation {
         this.DetailedPage = "/Page?p=" + Json.LocationId;
     }
 }
+
+function HeaderButton(HeadButtonId, displayPageId) {
+    const Button = document.querySelector("#" + HeadButtonId);
+    const Menu = document.querySelector("#" + displayPageId);
+
+    Button.addEventListener("click", function () {
+        Menu.classList.toggle("Hide");
+    });
+}
+
+HeaderButton("MenuButton", "Menu");
+HeaderButton("TagFilterButton", "TagFilter");
+HeaderButton("SearchBox-Button", "SearchBox");
 
 function AddFilterFormTag() {
     const AllTagURL = "http://localhost:8080/allTag";
