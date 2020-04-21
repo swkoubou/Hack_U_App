@@ -34,12 +34,12 @@ ul {
     height: 100%;
 }
 
-#LeftPadding {
+#HeaderMenu {
     margin-left: auto;
     display: flex;
 }
 
-.HeadButton {
+.HeaderItem {
     /*margin-left: auto;*/
     padding: 0 10px;
 }
