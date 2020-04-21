@@ -3,8 +3,15 @@ function HeaderButton(HeadButtonId, HeaderItemId) {
     const HeaderItem = document.querySelector("#" + HeaderItemId);
     HeaderItem.classList.add("MenuView");
 
-    Button.addEventListener("click", function () {
+    Button.addEventListener("click", function (Event) {
+        const HeaderButtons = document.querySelectorAll(".HeaderItem");
         const HeaderItems = document.querySelectorAll(".MenuView");
+        if (Button.classList.contains("SelectHeaderItem")) {
+            Button.classList.remove("SelectHeaderItem");
+        } else {
+            HeaderButtons.forEach(value => value.classList.remove("SelectHeaderItem"));
+            Button.classList.add("SelectHeaderItem");
+        }
         if (HeaderItem.classList.contains("Hide")) {
             HeaderItems.forEach(value => value.classList.add("Hide"));
             HeaderItem.classList.remove("Hide");
