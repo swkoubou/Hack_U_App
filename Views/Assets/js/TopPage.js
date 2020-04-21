@@ -114,14 +114,16 @@ function FilteringDisplay() {
 
 let map;
 let MarkerArray;
+let InfoWindows;
 
 function initMap() {
-    let myLatLng = {lat: 35.487027, lng: 139.342440};
-    map = new google.maps.Map(document.getElementById("Area"), {
-        center: myLatLng,
+    const KanagawakoukaLocation = {lat: 35.486555, lng: 139.343255};
+    map = new google.maps.Map(document.querySelector("#Area"), {
+        center: KanagawakoukaLocation,
         zoom: 18
     });
     MarkerArray = new google.maps.MVCArray;
+    InfoWindows = [];
     fetch("/allLocation")
         .then(function (response) {
             return response.json();
@@ -141,11 +143,34 @@ function initMap() {
             }
             InitMarker(LocationInformations);
         });
+
+    //検索システムの追加
+    const SearchBox = document.querySelector("#SearchBox-Input");
+    const Options = {
+        type: ['establishment'],
+    };
+    const Autocomplete = new google.maps.places.Autocomplete(SearchBox, Options);
+    Autocomplete.bindTo('bounds', map);
+
+    Autocomplete.addListener('place_changed', function () {
+        InfoWindows.forEach(InfoWindow => InfoWindow.close());
+        MarkerArray.forEach(Marker => Marker.setVisible(false));
+        const Place = Autocomplete.getPlace();
+        if (!Place.geometry) {
+            return;
+        }
+        if (Place.geometry.viewport) {
+            map.fitBounds(Place.geometry.viewport);
+        } else {
+            map.setCenter(Place.geometry.location);
+            map.setZoom(18);
+        }
+        MarkerArray.forEach(Marker => Marker.setVisible(true));
+    });
 }
 
 function InitMarker(LocationInformations) {
     let MarkersInformation;
-    let InfoWindows = [];
     let ContentString;
     MarkerArray.forEach(function (MarkerElement) {
         MarkerElement.setMap(null);
