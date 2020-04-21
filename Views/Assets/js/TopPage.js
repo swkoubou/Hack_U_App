@@ -1,10 +1,10 @@
 function HeaderButton(HeadButtonId, HeaderItemId) {
     const Button = document.querySelector("#" + HeadButtonId);
     const HeaderItem = document.querySelector("#" + HeaderItemId);
-    HeaderItem.classList.add("HeaderItem");
+    HeaderItem.classList.add("MenuView");
 
     Button.addEventListener("click", function () {
-        const HeaderItems = document.querySelectorAll(".HeaderItem");
+        const HeaderItems = document.querySelectorAll(".MenuView");
         if (HeaderItem.classList.contains("Hide")) {
             HeaderItems.forEach(value => value.classList.add("Hide"));
             HeaderItem.classList.remove("Hide");
@@ -117,7 +117,7 @@ let MarkerArray;
 let InfoWindows;
 
 function initMap() {
-    const KanagawakoukaLocation = {lat: 35.486555, lng: 139.343255};
+    const KanagawakoukaLocation = { lat: 35.486555, lng: 139.343255 };
     map = new google.maps.Map(document.querySelector("#Area"), {
         center: KanagawakoukaLocation,
         zoom: 18,
