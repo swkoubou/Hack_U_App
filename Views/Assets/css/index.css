@@ -47,6 +47,7 @@ ul {
 }
 
 .SelectHeaderItem {
+    padding-bottom: 3px;
     background: #FFFFFF;
     line-height: 40px;
     border-top: solid 10px #073561;
