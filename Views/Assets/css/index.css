@@ -44,6 +44,7 @@ ul {
     padding: 0px 20px;
     line-height: 40px;
     border-top: solid 10px dodgerblue;
+    color: #FFFFFF;
 }
 
 .SelectHeaderItem {
@@ -51,6 +52,7 @@ ul {
     background: #FFFFFF;
     line-height: 40px;
     border-top: solid 10px #073561;
+    color: #333333;
 }
 
 #Menu {
