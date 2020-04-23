@@ -11,15 +11,8 @@
 <body>
 	<div class="container">
 		<header>
-			<p>詳細画面</p>
-			<p class="drbutton">+</p>
+			<h2 class="HeaderTitle">詳細画面</h2>
 		</header>
-		<nav class="menu hide">
-			<ul>
-				<li>menu1</li>
-				<li>menu2</li>
-			</ul>
-		</nav>
 		<div id="Detail">
 			<h2>名前：<a href="{{ .WebSiteUrl }}" target="_self" rel="noreferrer">{{ .Name }}</a></h2>
 			<p> 住所：{{ .Address }}</p>
@@ -32,9 +25,7 @@
 				<li>ウェブサイト：<a href="{{ .WebSiteUrl }}" target="_self" rel="noreferrer">{{ .WebSiteUrl }}</a></li>
 			</ul>
 			{{ range .Tag }}
-			<input name="{{ .TagId }}" value="{{ .Name }}" type="button" class="tag"
-				onclick="alert('クリックされた値は' + this.value + 'です')">
-			</input>
+			<label class="tag SelectTag">{{ .Name }}</label>
 			{{ end }}
 			<p><a href="/" target="_self ">トップページに戻る</a></p>
 		</div>

@@ -1,10 +1,17 @@
 function HeaderButton(HeadButtonId, HeaderItemId) {
     const Button = document.querySelector("#" + HeadButtonId);
     const HeaderItem = document.querySelector("#" + HeaderItemId);
-    HeaderItem.classList.add("HeaderItem");
+    HeaderItem.classList.add("MenuView");
 
-    Button.addEventListener("click", function () {
-        const HeaderItems = document.querySelectorAll(".HeaderItem");
+    Button.addEventListener("click", function (Event) {
+        const HeaderButtons = document.querySelectorAll(".HeaderItem");
+        const HeaderItems = document.querySelectorAll(".MenuView");
+        if (Button.classList.contains("SelectHeaderItem")) {
+            Button.classList.remove("SelectHeaderItem");
+        } else {
+            HeaderButtons.forEach(value => value.classList.remove("SelectHeaderItem"));
+            Button.classList.add("SelectHeaderItem");
+        }
         if (HeaderItem.classList.contains("Hide")) {
             HeaderItems.forEach(value => value.classList.add("Hide"));
             HeaderItem.classList.remove("Hide");
@@ -28,11 +35,11 @@ class Tag {
         this.Checkbox.classList.add("Hide");
         this.Checkbox.value = TagId;
         this.Checkbox.id = TagName;
-        this.Label.classList.add("TagLabel");
+        this.Label.classList.add("tag");
         this.Label.htmlFor = TagName;
         this.Label.innerHTML = TagName;
         this.Label.onclick = function (event) {
-            event.target.classList.toggle("Select");
+            event.target.classList.toggle("SelectTag");
         }
 
     }
@@ -117,10 +124,14 @@ let MarkerArray;
 let InfoWindows;
 
 function initMap() {
-    const KanagawakoukaLocation = {lat: 35.486555, lng: 139.343255};
+    const MapInitialPosition = { lat: 35.443094, lng: 139.362540 };
     map = new google.maps.Map(document.querySelector("#Area"), {
-        center: KanagawakoukaLocation,
-        zoom: 18
+        center: MapInitialPosition,
+        zoom: 12,
+        disableDefaultUI: true,
+        zoomControl: true,
+        mapTypeControl: true,
+        streetViewControl: true,
     });
     MarkerArray = new google.maps.MVCArray;
     InfoWindows = [];
@@ -203,7 +214,7 @@ function CheckReset() {
     const CheckBox = document.FilterForm.FilterCheck;
     const Label = document.querySelectorAll(".TagLabel");
     for (let i = 0; i < CheckBox.length; i++) {
-        Label[i].classList.remove("Select");
+        Label[i].classList.remove("SelectTag");
         if (CheckBox[i].checked) {
             CheckBox[i].checked = false;
         }
