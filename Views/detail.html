@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>詳細画面（{{ .Name }}）</title>
+	<link rel="stylesheet" type="text/css" href="Assets/css/index.css">
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h2 class="HeaderTitle">詳細画面</h2>
+		</header>
+		<div id="Detail">
+			<h2>名前：<a href="{{ .WebSiteUrl }}" target="_self" rel="noreferrer">{{ .Name }}</a></h2>
+			<p> 住所：{{ .Address }}</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ .AddressSupplement }}</p>
+
+			<h3>--連絡先--</h3>
+			<ul>
+				<li>電話番号：<a href="tel:{{ .PhoneNumber }}">{{ .PhoneNumber }}</a></li>
+				<li>メール：<a href="mailto:{{ .Email }}">{{ .Email }}</a></li>
+				<li>ウェブサイト：<a href="{{ .WebSiteUrl }}" target="_self" rel="noreferrer">{{ .WebSiteUrl }}</a></li>
+			</ul>
+			{{ range .Tag }}
+			<label class="tag SelectTag">{{ .Name }}</label>
+			{{ end }}
+			<p><a href="/" target="_self ">トップページに戻る</a></p>
+		</div>
+	</div>
+	<script type="text/javascript" src="Assets/js/toppage.js"></script>
+</body>
+
+</html>
